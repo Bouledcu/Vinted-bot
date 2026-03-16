@@ -4,32 +4,15 @@ import time
 WEBHOOK = "https://discord.com/api/webhooks/1483007349898870948/JUYhAjFVXvVMHXvhb27fI_CmtfLfu_2oqispy5NQFBbRo-uDeinbnNgnnL1z8IMfHDoi"
 
 SEARCHES = [
-
-# vêtements
 "nike",
-"nike tech fleece",
 "ralph lauren",
 "lacoste",
-"stussy",
-"carhartt",
-"stone island",
-"the north face",
-
-# maillots
-"maillot foot",
 "maillot lens",
 "rc lens",
-"maillot psg",
-"maillot real madrid",
-
-# jeux vidéo
 "playstation",
 "ps5",
-"ps4",
 "nintendo switch",
-"pokemon",
-"zelda",
-"mario kart"
+"pokemon"
 ]
 
 seen=set()
@@ -49,13 +32,6 @@ def send(item):
  "url":link,
  "description":f"💰 {price}€",
  "image":{"url":photo}
- }],
- "components":[{
- "type":1,
- "components":[
- {"type":2,"label":"🛒 Acheter","style":5,"url":link},
- {"type":2,"label":"👀 Voir annonce","style":5,"url":link}
- ]
  }]
  }
 
@@ -80,4 +56,4 @@ while True:
     seen.add(item["id"])
     send(item)
 
- time.sleep(2)
+ time.sleep(10)
