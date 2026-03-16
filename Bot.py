@@ -30,7 +30,8 @@ while True:
 
         params = {
             "search_text": search,
-            "order": "newest_first"
+            "order": "newest_first",
+            "per_page": 5
         }
 
         r = requests.get(url, params=params)
@@ -54,4 +55,4 @@ while True:
 
                 requests.post(WEBHOOK, json={"content": message})
 
-    time.sleep(15)
+    time.sleep(10)
