@@ -1,7 +1,7 @@
 import requests
 import time
 
-WEBHOOK = "https://discord.com/api/webhooks/1483007349898870948/JUYhAjFVXvVMHXvhb27fI_CmtfLfu_2oqispy5NQFBbRo-uDeinbnNgnnL1z8IMfHDoi"
+WEBHOOK = "https://discord.com/api/webhooks/1483087079775666350/cTNQikMitumsMOR1q6hUN12eZr8DP5oD9aPjKoeCyJE8NWmPLvyvMleTEW0psZGgqqJv"
 
 SEARCHES = [
 "nike",
@@ -11,48 +11,40 @@ SEARCHES = [
 "maillot lens",
 "rc lens",
 "maillot football",
-"playstation",
 "ps5",
-"ps4",
-"nintendo switch",
 "pokemon",
-"zelda",
-"mario kart"
+"nintendo switch"
 ]
 
 seen = set()
+
+requests.post(WEBHOOK, json={"content": "🟢 BOT VINTED ACTIF"})
 
 while True:
 
     for search in SEARCHES:
 
-        url = "https://www.vinted.fr/api/v2/catalog/items"
-
-        params = {
-            "search_text": search,
-            "order": "newest_first",
-            "per_page": 5
-        }
-
-        r = requests.get(url, params=params)
+        url = f"https://www.vinted.fr/api/v2/catalog/items?search_text={search}&per_page=5"
 
         try:
+            r = requests.get(url)
             data = r.json()
+
+            for item in data["items"]:
+
+                if item["id"] not in seen:
+
+                    seen.add(item["id"])
+
+                    title = item["title"]
+                    price = item["price"]
+                    link = item["url"]
+
+                    message = f"🆕 {title}\n💰 {price}€\n🔗 {link}"
+
+                    requests.post(WEBHOOK, json={"content": message})
+
         except:
-            continue
+            pass
 
-        for item in data.get("items", []):
-
-            if item["id"] not in seen:
-
-                seen.add(item["id"])
-
-                title = item["title"]
-                price = item["price"]
-                link = item["url"]
-
-                message = f"🆕 {title}\n💰 {price}€\n🔗 {link}"
-
-                requests.post(WEBHOOK, json={"content": message})
-
-    time.sleep(10)
+    time.sleep(20)
