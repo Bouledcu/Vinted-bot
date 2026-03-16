@@ -42,9 +42,13 @@ while True:
 
                     message = f"🆕 {title}\n💰 {price}€\n🔗 {link}"
 
-                    requests.post(WEBHOOK, json={"content": message})
+                    requests.post(WEBHOOK, json={"content": message})l
 
         except:
             pass
 
     time.sleep(20)
+    print("BOT RUNNING")
+
+while True:
+    time.sleep(60)
