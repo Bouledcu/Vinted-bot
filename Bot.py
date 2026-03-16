@@ -48,7 +48,3 @@ while True:
             pass
 
     time.sleep(20)
-    print("BOT RUNNING")
-
-while True:
-    time.sleep(60)
